@@ -1,0 +1,31 @@
+services:
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./:/var/www/
+      - ./_docker/nginx/conf.d/:/etc/nginx/conf.d/
+    ports:
+      - "8081:80"
+    depends_on:
+      - app
+    container_name: app_nginx
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+        POSTGRES_USER: your_user
+        POSTGRES_PASSWORD: your_password
+        POSTGRES_DB: your_database
+    container_name: postgres_db
+    ports:
+        - "5432:5432"
+
+  app:
+    build:
+        context: .
+        dockerfile: _docker/app/Dockerfile
+    volumes:
+      - ./:/var/www/
+    container_name: app
+    command: /bin/sh -c "chmod -R 777 /var/www/storage /var/www/bootstrap/cache && php-fpm"
