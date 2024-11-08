@@ -9,7 +9,13 @@
     @vite(['resources/js/app.js'])
 </head>
 <body>
-<img src="{{asset('images/home_logo.png')}}" alt="Home Logo">
+<header>
+    <a href="{{ route('register') }}" class="top-button">Регистрация</a>
+    <a href="{{ route('login') }}" class="top-button">Авторизация</a>
+</header>
+<main>
+    <img src="{{asset('images/home_logo.png')}}" alt="Home Logo" class="center-image">
+</main>
 </body>
 </html>
 

@@ -1,11 +1,45 @@
-body, html {
-    height: 100%;
-    margin: 0;
-    display: grid;
-    place-items: center;
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Делает контейнер полного размера экрана */
 }
 
-img {
+.center-image {
     max-width: 100%;
-    max-height: 100%;
+    height: auto;
+}
+
+header {
+    display: flex;
+    gap: 10px; /* Расстояние между кнопками */
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.top-button {
+    position: absolute;
+    top: 10px; /* отступ сверху */
+    left: 10px; /* отступ справа */
+    padding: 20px 40px;
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none; /* Убирает подчеркивание у ссылки */
+    display: inline-block;
+}
+
+
+.top-button:first-child {
+    left: 10px; /* Отступ слева для первой кнопки */
+}
+.top-button:last-child {
+    left: 200px; /* Отступ слева для второй кнопки */
+}
+.top-button:hover {
+    background-color: #0056b3;
 }
