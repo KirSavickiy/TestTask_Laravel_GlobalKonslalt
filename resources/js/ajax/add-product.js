@@ -1,5 +1,4 @@
-
-document.getElementById('recordForm').addEventListener('submit', function(event) {
+document.getElementById('recordForm').addEventListener('submit', function (event) {
     event.preventDefault();
 
     const formData = new FormData(this);
@@ -21,3 +20,4 @@ document.getElementById('recordForm').addEventListener('submit', function(event)
         })
         .catch(error => console.error('Error:', error));
 });
+

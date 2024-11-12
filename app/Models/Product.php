@@ -14,6 +14,7 @@ class Product extends Model
         'article',
         'name',
         'status',
-        'data'
+        'data',
+        'user_id'
     ];
 }
