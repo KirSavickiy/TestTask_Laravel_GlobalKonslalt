@@ -11,7 +11,7 @@
         "@vitejs/plugin-vue": "^4.5.0",
         "alpinejs": "^3.4.2",
         "autoprefixer": "^10.4.2",
-        "axios": "^1.7.4",
+        "axios": "^1.7.7",
         "bootstrap": "^5.2.3",
         "concurrently": "^9.0.1",
         "laravel-vite-plugin": "^1.0",
@@ -23,7 +23,7 @@
     },
     "name": "www",
     "version": "1.0.0",
-    "description": "## \u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0444\u0443\u043d\u043a\u0446\u0438\u043e\u043d\u0430\u043b\u0430",
+    "description": "## Описание функционала",
     "main": "postcss.config.js",
     "directories": {
         "test": "tests"

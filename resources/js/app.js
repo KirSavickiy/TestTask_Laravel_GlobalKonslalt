@@ -1,5 +1,9 @@
 import './bootstrap';
 import '../css/styles.css';
+import '../css/dashboard.css';
+import './modalWindows.js';
+import './ajax/add-product.js';
+
 
 import Alpine from 'alpinejs';
 
