@@ -1,9 +1,9 @@
 import './bootstrap';
 import '../css/styles.css';
 import '../css/dashboard.css';
-import './modalWindows.js';
-import './ajax/add-product.js';
-import './addAttribute.js';
+import './components/buttons.js';
+import './ajax.js';
+import './forms.js';
 
 
 

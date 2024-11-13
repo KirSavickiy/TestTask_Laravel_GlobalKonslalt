@@ -1,0 +1,56 @@
+#recordForm {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 1rem;
+    background-color: #f9fafb;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Увеличиваем ширину полей */
+#recordArticle, #recordName, #attributesContainer input {
+    width: 100%;
+}
+
+/* Стили для контейнера атрибутов */
+#attributesContainer {
+    max-height: 200px;
+    overflow-y: auto;
+    padding-right: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Стили для блока атрибута */
+.attribute-pair {
+    display: flex;
+    gap: 1rem; /* Добавляем отступы между полями */
+    margin-bottom: 1rem;
+}
+
+/* Стили для поля ввода */
+.attribute-pair input {
+    flex: 1; /* Заставляет оба поля занимать равную ширину */
+}
+
+/* Стили для кнопки удалить */
+button[type="button"] {
+    font-size: 0.875rem;
+    padding: 0.25rem 0.75rem;
+    background-color: #f87171;
+    color: white;
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="button"]:hover {
+    background-color: #f43f5e;
+}
+
+/* Стили для ошибки */
+.error {
+    color: #ef4444;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}

@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+header('Content-Type: application/json; charset=UTF-8');
 
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Requests\ProductRequest;
 use App\Models\Product;
-use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -17,16 +16,18 @@ class ProductController extends Controller
 
     public function store(ProductRequest $request)
     {
-        $input = $request->validated();
-//        Product::create(
-//            [
-//                'user_id' => Auth::id(),
-//                'name' => $input['name'],
-//                'article' => $input['article'],
-//                'status' => $input['status'],
-//            ]
-//        );
+        $input = $request->all();
+//
+//
+////        Product::create(
+////            [
+////                'user_id' => Auth::id(),
+////                'name' => $input['name'],
+////                'article' => $input['article'],
+////                'status' => $input['status'],
+////            ]
+////        );
         return response()->json($input);
-    }
 
+    }
 }
