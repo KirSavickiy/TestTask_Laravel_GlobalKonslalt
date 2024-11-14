@@ -17,4 +17,8 @@ class Product extends Model
         'data',
         'user_id'
     ];
+
+    protected $casts = [
+        'attributes' => 'array',
+    ];
 }

@@ -26,7 +26,7 @@ class ProductRequest extends FormRequest
         $rules = [
             'name' => 'required|string|min:10|max:255',
             'article' => 'required|string|min:1|max:255|regex:/^[A-Za-z0-9]+$/|unique:products,article',
-            'status' => 'required:required|string',
+            'status' => 'required|in:available,unavailable',
         ];
         $rules = array_merge($rules, $this->validateAttribute());
         return $rules;
@@ -52,7 +52,6 @@ class ProductRequest extends FormRequest
             'article.regex' => 'Поле "Артикул" может содержать только латинские символы и цифры.',
             'article.unique' => 'Это поле уже занято. Пожалуйста, выберите другое.',
             'status.required' => 'Выберете статус продукта!',
-            'attributes.*.required' => 'Необходимо заполнить все поля.',
         ];
     }
 
@@ -63,30 +62,23 @@ class ProductRequest extends FormRequest
         $attributesErrors = [];
 
         foreach ($errors as $field => $messages) {
-            // Проверяем, содержит ли поле `attributes.*.key` или `attributes.*.value`
             if (preg_match('/^attributes\.(\d+)\.(key|value)$/', $field, $matches)) {
-                // Получаем индекс атрибута из регулярного выражения
                 $index = $matches[1];
 
-                // Группируем ошибки по индексу атрибута
                 if (!isset($attributesErrors[$index])) {
                     $attributesErrors[$index] = [];
                 }
 
-                // Добавляем ошибку в соответствующую группу
                 $attributesErrors[$index][] = $messages[0];
             } else {
-                // Для других полей оставляем ошибки как есть
                 $filteredErrors[$field] = $messages;
             }
         }
 
-        // Для каждого атрибута добавляем единую ошибку (например, "Необходимо заполнить все поля.")
         foreach ($attributesErrors as $index => $messages) {
             $filteredErrors["attributes.$index"] = ['Необходимо заполнить все поля.'];
         }
 
-        // Отправляем ответ с ошибками
         throw new HttpResponseException(
             response()->json(['errors' => $filteredErrors], 422)
         );

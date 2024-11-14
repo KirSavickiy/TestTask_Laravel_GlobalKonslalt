@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {let attributeIndex = 0
         const attributeError = document.createElement('span');
         attributeError.id = `attributes.${attributeIndex}_error`;
         attributeError.classList.add('error', 'text-red-500', 'text-sm', 'block', 'mt-1');
-        
+
         attributePair.appendChild(keyInput);
         attributePair.appendChild(valueInput);
         attributePair.appendChild(removeButton);
@@ -39,4 +39,23 @@ document.addEventListener("DOMContentLoaded", function() {let attributeIndex = 0
 
         attributeIndex++;
     }
+
+    window.openViewModal = function (button){
+        const productId = button.getAttribute('data-id')
+
+        fetch(`/product/${productId}`, {
+            method: 'GET',
+            headers: {
+                "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                "Accept": "application/json",
+                "Content-Type": "application/json; charset=UTF-8"
+            },
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => console.error('Ошибка:', error));
+    }
+
 });

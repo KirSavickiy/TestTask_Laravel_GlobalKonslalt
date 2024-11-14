@@ -8,7 +8,9 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/dashboard', [ProductController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/products', [ProductController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('product/{id}', [ProductController::class, 'show'])->middleware(['auth', 'verified'])->name('product.show');
 Route::post('/product/store', [ProductController::class, 'store'])->middleware(['auth', 'verified'])->name('product.store');
 
 Route::middleware('auth')->group(function () {

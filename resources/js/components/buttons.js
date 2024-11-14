@@ -6,3 +6,4 @@ document.getElementById('closeModalButton').addEventListener('click', () => {
     document.getElementById('modal').classList.add('hidden');
 });
 
+
