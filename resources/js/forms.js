@@ -51,11 +51,19 @@ document.addEventListener("DOMContentLoaded", function() {let attributeIndex = 0
                 "Content-Type": "application/json; charset=UTF-8"
             },
         })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
+            .then(response => response.text())
+            .then(html => {
+                const modalContainer = document.getElementById('modalContainer');
+                modalContainer.innerHTML = html;
+
+                document.getElementById('viewModalProduct').classList.remove('hidden');
             })
-            .catch(error => console.error('Ошибка:', error));
+            .catch(error => {
+                console.error('Ошибка загрузки данных продукта:', error);
+            });
+    }
+    window.closeModal = function (){
+        document.getElementById('viewModalProduct').classList.add('hidden');
     }
 
 });

@@ -1,20 +1,18 @@
-<div class="relative">
-    <!-- Модальное окно -->
-
-    <div id="modal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
+    <div id="viewModalProduct" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
         <div class="bg-white rounded-lg shadow-lg w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-6">
             <div class="flex justify-between items-center border-b pb-4 mb-4">
-                <!-- Заголовок и кнопки -->
 
                 <h3 class="text-2xl font-semibold text-gray-800">{{ $product->name }}</h3>
                 <div class="flex items-center gap-2">
-                    <!-- Кнопка закрытия -->
-                    <button id="closeModalButton" class="text-gray-600 hover:text-gray-800" onclick="closeModal()">
-                        <span class="text-xl">×</span>
+                    <!-- Кнопка закрытия в правом верхнем углу -->
+                    <button id="closeModalButton" class="absolute top-2 right-2 p-2 text-gray-400 hover:text-gray-800" onclick="closeModal()" title="Закрыть" style="font-size: 24px; background: none; border: none; cursor: pointer;">
+                        ✖ <!-- Символ крестика -->
                     </button>
+
                     <!-- Кнопка редактирования -->
-                    <a href="#" class="text-blue-500 hover:text-blue-700">
-                        Редактировать
+                    <a href="#" class="text-blue-500 hover:text-blue-700" title="Редактировать">
+                        <!-- Используем иконку Font Awesome (или SVG-иконку) -->
+                        <i class="fas fa-edit text-xl"></i> <!-- Font Awesome -->
                     </a>
                 </div>
             </div>
@@ -59,4 +57,3 @@
             </div>
         </div>
     </div>
-</div>
