@@ -12,6 +12,8 @@ Route::get('/products', [ProductController::class, 'index'])->middleware(['auth'
 
 Route::get('product/{id}', [ProductController::class, 'show'])->middleware(['auth', 'verified'])->name('product.show');
 Route::post('/product/store', [ProductController::class, 'store'])->middleware(['auth', 'verified'])->name('product.store');
+Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->middleware(['auth', 'verified'])->name('product.edit');
+Route::put('/product/update/{id}', [ProductController::class, 'update'])->middleware(['auth', 'verified'])->name('product.update');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -1,3 +1,9 @@
+<div id="modal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white rounded-lg shadow-lg w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-6">
+        <div class="flex justify-between items-center">
+            <h3 class="text-xl font-semibold">Добавить продукт</h3>
+            <button id="closeModalButton" class="text-gray-400 hover:text-gray-600 focus:outline-none">&times;</button>
+        </div>
 <form id="recordForm" class="mt-4">
     @csrf
     <input type="hidden" name="id" id="recordId">
@@ -41,3 +47,5 @@
         <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Добавить</button>
     </div>
 </form>
+    </div>
+</div>

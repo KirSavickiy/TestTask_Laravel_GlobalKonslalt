@@ -20,7 +20,13 @@ class ProductController extends Controller
 
     public function show(Request $request, $id)
     {
+        if (!$request->expectsJson()) {
+            abort(403, 'Forbidden');
+        }
         $product = Product::find($id);
+        if (!$product) {
+            return response()->json(['error' => 'Product not found'], 404);
+        }
         return view('windows.view-product', compact('product'));
     }
 
@@ -41,6 +47,26 @@ class ProductController extends Controller
         }
         return response()->json($input);
 
+    }
+
+    public function edit(Request $request, $id)
+    {
+        if (!$request->expectsJson()) {
+            abort(403, 'Forbidden');
+        }
+        $product = Product::find($id);
+        $product->data = json_decode($product->data);
+        if (!$product) {
+            return response()->json(['error' => 'Product not found'], 404);
+        }
+
+        return view('windows.update-product', compact('product'));
+
+    }
+    public function update(ProductRequest $request, $id)
+    {
+        $input = $request->all();
+        return response()->json($input);
     }
 
         public function __construct(AttributeService $attributeService)

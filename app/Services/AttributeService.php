@@ -14,4 +14,5 @@ class AttributeService
         }
         return $array;
     }
+
 }

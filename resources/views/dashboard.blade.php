@@ -1,15 +1,7 @@
 <x-app-layout>
     <div class="flex justify-between items-center p-6">
         <button id="openModalButton" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none sm:px-6 sm:py-3 sm:text-lg">Добавить</button>
-        <div id="modal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
-            <div class="bg-white rounded-lg shadow-lg w-full sm:w-1/2 md:w-1/3 lg:w-1/4 p-6">
-                <div class="flex justify-between items-center">
-                    <h3 class="text-xl font-semibold">Добавить продукт</h3>
-                    <button id="closeModalButton" class="text-gray-400 hover:text-gray-600 focus:outline-none">&times;</button>
-                </div>
                 @include('windows.add-product')
-            </div>
-        </div>
     </div>
 
     <div class="overflow-x-auto max-w-6xl mx-auto">
@@ -54,7 +46,9 @@
                             <button class="bg-gray-200 text-gray-700 px-3 py-1 rounded hover:bg-gray-300"
                             data-id="{{$product->id}}" onclick="openViewModal(this)">Смотреть</button>
                             <div id="modalContainer"></div>
-                            <button class="bg-gray-200 text-gray-700 px-3 py-1 rounded hover:bg-gray-300">Редактировать</button>
+                            <button class="bg-gray-200 text-gray-700 px-3 py-1 rounded hover:bg-gray-300"
+                                data-id="{{$product->id}}" onclick="openUpdateModal(this)"> Редактировать</button>
+                            <div id="modalUpdateContainer"></div>
                             <button class="bg-gray-200 text-gray-700 px-3 py-1 rounded hover:bg-gray-300" onclick="confirm('Вы уверены, что хотите удалить?')">
                                 <span class="text-lg">&#x2715;</span>
                             </button>
