@@ -4,16 +4,14 @@
 
                 <h3 class="text-2xl font-semibold text-gray-800">{{ $product->name }}</h3>
                 <div class="flex items-center gap-2">
-                    <!-- Кнопка закрытия в правом верхнем углу -->
-                    <button id="closeModalButton" class="absolute top-2 right-2 p-2 text-gray-400 hover:text-gray-800" onclick="closeModal()" title="Закрыть" style="font-size: 24px; background: none; border: none; cursor: pointer;">
-                        ✖ <!-- Символ крестика -->
-                    </button>
 
-                    <!-- Кнопка редактирования -->
+
                     <a href="#" class="text-blue-500 hover:text-blue-700" title="Редактировать">
-                        <!-- Используем иконку Font Awesome (или SVG-иконку) -->
-                        <i class="fas fa-edit text-xl"></i> <!-- Font Awesome -->
+                        <i class="fas fa-edit text-xl"></i>
                     </a>
+                    <button id="closeModalButton" class="text-gray-400 hover:text-gray-600 focus:outline-none" onclick="closeModal()">
+                        &times;
+                    </button>
                 </div>
             </div>
 

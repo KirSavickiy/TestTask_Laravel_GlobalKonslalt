@@ -14,5 +14,11 @@ class AttributeService
         }
         return $array;
     }
-
+    public function getCountAttributes(array $attributes):int
+    {
+        foreach ($attributes as $attribute) {
+            return count($attribute);
+        }
+        return 0;
+    }
 }

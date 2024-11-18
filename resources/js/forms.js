@@ -1,5 +1,7 @@
+
 document.addEventListener("DOMContentLoaded", function() {
     let attributeIndex = 0;
+    let index = 0;
 
     window.addAttribute = function () {
         const container = document.getElementById('attributesContainer'); //Must be Refactoring
@@ -44,21 +46,22 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     window.addUpdateAttribute = function () {
-        const container = document.getElementById('attributesUpdateContainer');//Must be Refactoring
 
+        const container = document.getElementById('attributesUpdateContainer');//Must be Refactoring
+        console.log(index)
 
         const attributePair = document.createElement('div');
         attributePair.classList.add('flex', 'flex-col', 'mb-4');
 
         const keyInput = document.createElement('input');
         keyInput.setAttribute('type', 'text');
-        keyInput.setAttribute('name', `attributes.${attributeIndex}.key`);
+        keyInput.setAttribute('name', `attributes.${index}.key`);
         keyInput.setAttribute('placeholder', 'Название');
         keyInput.classList.add('p-2', 'border', 'border-gray-300', 'rounded-md', 'focus:outline-none', 'focus:border-blue-500');
 
         const valueInput = document.createElement('input');
         valueInput.setAttribute('type', 'text');
-        valueInput.setAttribute('name', `attributes.index_${attributeIndex}.value`);
+        valueInput.setAttribute('name', `attributes.${index}.value`);
         valueInput.setAttribute('placeholder', 'Значение');
         valueInput.classList.add('p-2', 'border', 'border-gray-300', 'rounded-md', 'focus:outline-none', 'focus:border-blue-500');
 
@@ -71,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function() {
         };
 
         const attributeError = document.createElement('span');
-        attributeError.id = `attributes.index_${attributeIndex}_error`;
+        attributeError.id = `attributes.${index}_error`;
         attributeError.classList.add('error', 'text-red-500', 'text-sm', 'block', 'mt-1');
 
         attributePair.appendChild(keyInput);
@@ -81,11 +84,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
         container.appendChild(attributePair);
 
-
-        attributeIndex++;
+        index++;
 
     }
-
     window.openViewModal = function (button) {
         const productId = button.getAttribute('data-id')
 
@@ -114,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     window.openUpdateModal = function (button) {
         const productId = button.getAttribute('data-id')
-
+        index = button.getAttribute('data-attributes')
         fetch(`/product/edit/${productId}`, {
             method: 'GET',
             headers: {
@@ -133,7 +134,9 @@ document.addEventListener("DOMContentLoaded", function() {
             .catch(error => {
                 console.error('Ошибка загрузки данных продукта:', error);
             });
+
     }
+
 
     window.closeUpdateModal = function () {
         document.getElementById('updateModalProduct').classList.add('hidden');
@@ -142,7 +145,8 @@ document.addEventListener("DOMContentLoaded", function() {
     window.removeDiv = function (divId) {
         const element = document.getElementById(divId);
         if (element) {
-            element.remove(); // Удаляет элемент из DOM
+            element.remove();
         }
     }
+
 });

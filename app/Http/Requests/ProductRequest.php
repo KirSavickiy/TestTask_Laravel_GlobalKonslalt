@@ -23,9 +23,17 @@ class ProductRequest extends FormRequest
      */
     public function rules(): array
     {
+        $prductId = $this->route('id');
         $rules = [
             'name' => 'required|string|min:10|max:255',
-            'article' => 'required|string|min:1|max:255|regex:/^[A-Za-z0-9]+$/|unique:products,article',
+            'article' => [
+                'required',
+                'string',
+                'min:1',
+                'max:255',
+                'regex:/^[A-Za-z0-9]+$/',
+                ($prductId) ? 'unique:products,article,' . $prductId : 'unique:products,article',
+            ],
             'status' => 'required|in:available,unavailable',
         ];
         $rules = array_merge($rules, $this->validateAttribute());

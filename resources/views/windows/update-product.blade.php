@@ -4,7 +4,7 @@
             <h3 class="text-xl font-semibold">Редактировать продукт</h3>
             <button id="closeModalButton" class="text-gray-400 hover:text-gray-600 focus:outline-none" onclick="closeUpdateModal()">&times;</button>
         </div>
-        <form id="recordForm" class="mt-4">
+        <form id="updateForm" class="mt-4">
             @csrf
             <input type="hidden" name="id" id="recordId">
 
@@ -36,15 +36,14 @@
                 <label class="block text-sm font-medium text-gray-700">Атрибуты</label>
                 <div id="attributesUpdateContainer" class="max-h-64 overflow-y-auto pr-2 space-y-2">
                 @if($product->data != null)
-                    @php($index = 0)
                     @foreach($product->data as $name=>$value)
-                        <div id="{{$index}}" class="flex flex-col mb-4">
-                            <input type="text" name="attributes.{{$index}}.key" placeholder="Название" value="{{$name}}" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
-                            <input type="text" name="attributes.{{$index}}.value" placeholder="Значение"  value="{{$value}}" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
-                            <button type="button" onclick="removeDiv({{$index}})" class="ml-2 text-red-500 hover:text-red-700">❌</button>
-                            <span id="attributes.{{$index}}_error" class="error text-red-500 text-sm block mt-1"></span>
+                        <div id="{{$product->index}}" class="flex flex-col mb-4">
+                            <input type="text" name="attributes.{{$product->index}}.key" placeholder="Название" value="{{$name}}" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                            <input type="text" name="attributes.{{$product->index}}.value" placeholder="Значение"  value="{{$value}}" class="p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+                            <button type="button" onclick="removeDiv({{$product->index}})" class="ml-2 text-red-500 hover:text-red-700">❌</button>
+                            <span id="attributes.{{$product->index}}_error" class="error text-red-500 text-sm block mt-1"></span>
                         </div>
-                        @php($index++)
+                        @php($product->index++)
                     @endforeach
                 @endif
                 </div>
@@ -52,7 +51,7 @@
             </div>
 
             <div class="flex justify-end">
-                <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Добавить</button>
+                <button data-product-id="{{$product->id}}" id="submit" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Добавить</button>
             </div>
         </form>
     </div>

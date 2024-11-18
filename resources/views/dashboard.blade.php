@@ -47,8 +47,9 @@
                             data-id="{{$product->id}}" onclick="openViewModal(this)">Смотреть</button>
                             <div id="modalContainer"></div>
                             <button class="bg-gray-200 text-gray-700 px-3 py-1 rounded hover:bg-gray-300"
-                                data-id="{{$product->id}}" onclick="openUpdateModal(this)"> Редактировать</button>
-                            <div id="modalUpdateContainer"></div>
+                                data-id="{{$product->id}}" data-attributes="{{ count($attributes)}}" onclick="openUpdateModal(this)"> Редактировать</button>
+                            <div id="modalUpdateContainer">
+                            </div>
                             <button class="bg-gray-200 text-gray-700 px-3 py-1 rounded hover:bg-gray-300" onclick="confirm('Вы уверены, что хотите удалить?')">
                                 <span class="text-lg">&#x2715;</span>
                             </button>

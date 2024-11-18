@@ -33,7 +33,9 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         $input = $request->validated();
-        $input['attributes'] = $this->attributeService->transformAttributes($input['attributes']);
+        $input['attributes'] = isset($input['attributes'])
+            ? $this->attributeService->transformAttributes($input['attributes'])
+            : [];
         try {
             Product::create([
                 'user_id' => Auth::id(),
@@ -49,12 +51,20 @@ class ProductController extends Controller
 
     }
 
+    public function update(ProductRequest $request, $id)
+    {
+        $input = $request->validated();
+        return response()->json($input);
+    }
+
     public function edit(Request $request, $id)
     {
         if (!$request->expectsJson()) {
             abort(403, 'Forbidden');
         }
+
         $product = Product::find($id);
+        $product->index = 0;
         $product->data = json_decode($product->data);
         if (!$product) {
             return response()->json(['error' => 'Product not found'], 404);
@@ -62,11 +72,6 @@ class ProductController extends Controller
 
         return view('windows.update-product', compact('product'));
 
-    }
-    public function update(ProductRequest $request, $id)
-    {
-        $input = $request->all();
-        return response()->json($input);
     }
 
         public function __construct(AttributeService $attributeService)
