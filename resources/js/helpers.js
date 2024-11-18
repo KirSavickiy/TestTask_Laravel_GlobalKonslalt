@@ -1,4 +1,5 @@
 export function displayErrors(errors) {
+    if (!errors) return;
 
     const errorElements = document.querySelectorAll('.error');
     errorElements.forEach(element => element.textContent = '');
@@ -8,7 +9,6 @@ export function displayErrors(errors) {
 
         if (fieldName[0] === 'attributes' && fieldName.length === 2) {
             const attributeIndex = fieldName[1];
-
             const errorElementId = `attributes.${attributeIndex}_error`;
 
             const errorElement = document.getElementById(errorElementId);
@@ -27,6 +27,7 @@ export function displayErrors(errors) {
 export function transformFormdata(formData){
 
     const formObject = {};
+    if (!formData) return formObject;
     formData.forEach((value, key) => {
         if (key.startsWith('attributes.')) {
             const attributeKey = key.match(/attributes\.(\d+)\.(key|value)/);

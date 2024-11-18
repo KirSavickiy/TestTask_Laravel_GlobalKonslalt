@@ -14,7 +14,7 @@ class ProductController extends Controller
     protected AttributeService $attributeService;
     public function index()
     {
-        $products = Product::all();
+        $products = Product::orderBy('created_at', 'asc')->get();
         return view('dashboard', compact('products'));
     }
 
@@ -47,13 +47,29 @@ class ProductController extends Controller
         } catch (\Exception $e) {
             dd($e->getMessage());
         }
-        return response()->json($input);
-
+        return response()->json([
+            'success' => true,
+            'message' => 'Продукт успешно добавлен',
+        ]);
     }
 
     public function update(ProductRequest $request, $id)
     {
         $input = $request->validated();
+
+        $input['attributes'] = isset($input['attributes'])
+            ? $this->attributeService->transformAttributes($input['attributes'])
+            : [];
+        try{
+            Product::where('id', $id)->update([
+                'name' => $input['name'],
+                'article' => $input['article'],
+                'status' => $input['status'],
+                'data' => json_encode($input['attributes']),
+            ]);
+        }catch (\Exception $e) {
+            dd($e->getMessage());
+        }
         return response()->json($input);
     }
 

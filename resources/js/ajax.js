@@ -17,11 +17,13 @@ document.getElementById('recordForm').addEventListener('submit', function (event
     })
         .then(response => response.json())
         .then(data => {
+            console.log('Response data:', data);
             if (data.success) {
                 alert(data.message);
                 document.getElementById('modal').classList.add('hidden');
+                window.location.href = '/products';
             } else {
-                displayErrors(data.errors);
+                    displayErrors(data.errors);
             }
         })
         .catch(error => console.error('Error:', error));
