@@ -14,7 +14,7 @@ class ProductController extends Controller
     protected AttributeService $attributeService;
     public function index()
     {
-        $products = Product::orderBy('created_at', 'asc')->get();
+        $products = Product::orderBy('created_at', 'desc')->paginate(15);
         return view('dashboard', compact('products'));
     }
 

@@ -137,7 +137,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     }
 
-
     window.closeUpdateModal = function () {
         document.getElementById('updateModalProduct').classList.add('hidden');
     }
