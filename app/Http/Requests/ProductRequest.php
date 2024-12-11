@@ -44,6 +44,12 @@ class ProductRequest extends FormRequest
     {
         $rules = [];
         $attributes = $this->input('attributes', []);
+        foreach ($attributes as $key => $value) {
+            if ($value === null) {
+                unset($attributes[$key]);
+            }
+        }
+        
 
         foreach ($attributes as $index => $attribute) {
             $rules["attributes.$index.key"] = 'required|string';
@@ -53,10 +59,13 @@ class ProductRequest extends FormRequest
         return $rules;
     }
 
+
+
     public function messages(): array
     {
         return [
             'name' => 'Имя продукта должно иметь минимум 10 символов!',
+            'article.required' => 'Поле "Артикул обязательно для заполнения!',
             'article.regex' => 'Поле "Артикул" может содержать только латинские символы и цифры.',
             'article.unique' => 'Это поле уже занято. Пожалуйста, выберите другое.',
             'status.required' => 'Выберете статус продукта!',

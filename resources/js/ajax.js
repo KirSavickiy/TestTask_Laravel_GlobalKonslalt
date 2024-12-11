@@ -1,5 +1,6 @@
 import {displayErrors} from "./helpers.js";
 import {transformFormdata} from "./helpers.js";
+
 document.getElementById('recordForm').addEventListener('submit', function (event) {
     event.preventDefault();
 

@@ -55,22 +55,24 @@ class ProductController extends Controller
 
     public function update(ProductRequest $request, $id)
     {
-        $input = $request->validated();
-
-        $input['attributes'] = isset($input['attributes'])
-            ? $this->attributeService->transformAttributes($input['attributes'])
+        $input = $request->all();
+        $input['attributesUpdate'] = isset($input['attributesUpdate'])
+            ? $this->attributeService->transformAttributes($input['attributesUpdate'])
             : [];
         try{
             Product::where('id', $id)->update([
                 'name' => $input['name'],
                 'article' => $input['article'],
                 'status' => $input['status'],
-                'data' => json_encode($input['attributes']),
+                'data' => json_encode($input['attributesUpdate']),
             ]);
         }catch (\Exception $e) {
             dd($e->getMessage());
         }
-        return response()->json($input);
+        return response()->json([
+            'success' => true,
+            'message' => 'Продукт успешно отредактирован',
+        ]);
     }
 
     public function edit(Request $request, $id)

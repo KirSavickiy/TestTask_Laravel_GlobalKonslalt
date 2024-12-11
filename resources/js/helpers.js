@@ -1,6 +1,6 @@
-export function displayErrors(errors) {
+export function displayErrors(errors, update = false) {
     if (!errors) return;
-
+    let errorElement = null;
 
     const errorElements = document.querySelectorAll('.error');
     errorElements.forEach(element => element.textContent = '');
@@ -13,12 +13,17 @@ export function displayErrors(errors) {
             const errorElementId = `attributes.${attributeIndex}_error`;
 
 
+
             const errorElement = document.getElementById(errorElementId);
             if (errorElement) {
                 errorElement.textContent = messages[0];
             }
         } else {
-            const errorElement = document.getElementById(`${field}_error`);
+            if (update){
+                errorElement = document.getElementById(`${field}_update_error`);
+            } else{
+                errorElement = document.getElementById(`${field}_error`);
+            }
             if (errorElement) {
                 errorElement.textContent = messages[0];
             }

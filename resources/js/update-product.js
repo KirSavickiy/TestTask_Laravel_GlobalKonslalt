@@ -30,11 +30,16 @@ document.body.addEventListener('click', function (e) {
         })
             .then(response => response.json())
             .then(data => {
+                console.log('Response data:', data);
                 if (data.success) {
                     alert(data.message);
+                    if ( document.getElementById('viewModalProduct')){
+                        document.getElementById('viewModalProduct').classList.add('hidden');
+                    }
                     document.getElementById('updateModalProduct').classList.add('hidden');
+                    window.location.href = '/products';
                 } else {
-                    displayErrors(data.errors);
+                    displayErrors(data.errors, true);
                 }
             })
             .catch(error => console.error('Error:', error));
