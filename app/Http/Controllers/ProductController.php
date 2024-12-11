@@ -55,10 +55,13 @@ class ProductController extends Controller
 
     public function update(ProductRequest $request, $id)
     {
-        $input = $request->all();
+        $input = $request->validated();
+
         $input['attributesUpdate'] = isset($input['attributesUpdate'])
             ? $this->attributeService->transformAttributes($input['attributesUpdate'])
             : [];
+
+            
         try{
             Product::where('id', $id)->update([
                 'name' => $input['name'],

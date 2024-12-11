@@ -48,6 +48,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
 
+    
     window.openViewModal = function (button) {
         const productId = button.getAttribute('data-id')
 
@@ -75,7 +76,11 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     window.openUpdateModal = function (button) {
-        const productId = button.getAttribute('data-id')
+        const productId = button.getAttribute('data-id');
+        const attributes = button.getAttribute('data-attributes');
+        const parsedAttributes = JSON.parse(attributes);
+
+        console.log(attributes);
         fetch(`/product/edit/${productId}`, {
             method: 'GET',
             headers: {
@@ -89,6 +94,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 const modalContainer = document.getElementById('modalUpdateContainer');
                 modalContainer.innerHTML = html;
                 document.getElementById('updateModalProduct').classList.remove('hidden');
+                for (const [name, value] of Object.entries(parsedAttributes)) {
+                    addAttribute(name, value, true);
+                }
+                
             })
             .catch(error => {
                 console.error('Ошибка загрузки данных продукта:', error);

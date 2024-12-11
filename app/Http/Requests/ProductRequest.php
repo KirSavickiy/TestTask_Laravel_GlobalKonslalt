@@ -36,6 +36,7 @@ class ProductRequest extends FormRequest
             ],
             'status' => 'required|in:available,unavailable',
         ];
+
         $rules = array_merge($rules, $this->validateAttribute());
         return $rules;
     }
@@ -43,10 +44,19 @@ class ProductRequest extends FormRequest
     private function validateAttribute(): array
     {
         $rules = [];
+        $attributesUpdate = $this->input('attributesUpdate', []);
         $attributes = $this->input('attributes', []);
+
+
         foreach ($attributes as $key => $value) {
             if ($value === null) {
                 unset($attributes[$key]);
+            }
+        }
+        
+        foreach ($attributesUpdate as $key => $value) {
+            if ($value === null) {
+                unset($attributesUpdate[$key]);
             }
         }
         
@@ -54,6 +64,11 @@ class ProductRequest extends FormRequest
         foreach ($attributes as $index => $attribute) {
             $rules["attributes.$index.key"] = 'required|string';
             $rules["attributes.$index.value"] = 'required|string';
+        }
+
+        foreach ($attributesUpdate as $index => $attribute) {
+            $rules["attributesUpdate.$index.key"] = 'required|string';
+            $rules["attributesUpdate.$index.value"] = 'required|string';
         }
 
         return $rules;
@@ -79,23 +94,24 @@ class ProductRequest extends FormRequest
         $attributesErrors = [];
 
         foreach ($errors as $field => $messages) {
-            if (preg_match('/^attributes\.(\d+)\.(key|value)$/', $field, $matches)) {
-                $index = $matches[1];
+            if (preg_match('/^(attributes|attributesUpdate)\.(\d+)\.(key|value)$/', $field, $matches)) {
+                $group = $matches[1]; 
+                $index = $matches[2];
 
-                if (!isset($attributesErrors[$index])) {
-                    $attributesErrors[$index] = [];
+                if (!isset($attributesErrors["$group.$index"])) {
+                    $attributesErrors["$group.$index"] = [];
                 }
-
-                $attributesErrors[$index][] = $messages[0];
+    
+                $attributesErrors["$group.$index"] = array_merge($attributesErrors["$group.$index"], $messages);
             } else {
                 $filteredErrors[$field] = $messages;
             }
         }
-
-        foreach ($attributesErrors as $index => $messages) {
-            $filteredErrors["attributes.$index"] = ['Необходимо заполнить все поля.'];
+    
+        foreach ($attributesErrors as $field => $messages) {
+            $filteredErrors[$field] = ['Необходимо заполнить все поля.'];
         }
-
+    
         throw new HttpResponseException(
             response()->json(['errors' => $filteredErrors], 422)
         );

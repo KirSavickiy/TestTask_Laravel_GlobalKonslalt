@@ -42,17 +42,14 @@
             <div class="mb-4">
                 <label class="block text-sm font-medium text-gray-700">Атрибуты</label>
                 <div id="attributesUpdateContainer" class="max-h-64 overflow-y-auto pr-2 space-y-2">
-
                 </div>
                 <button type="button" onclick="addAttribute(undefined, undefined, true)"
-                    class="mt-2 px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400">+ Добавить
-                    атрибут</button>
-            </div>
-
-            <div class="flex justify-end">
-                <button data-product-id="{{$product->id}}" id="submit"
-                    class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Добавить</button>
-            </div>
+                        class="mt-2 px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400">+ Добавить
+                        атрибут</button>
+                <div class="flex justify-end">
+                    <button data-product-id="{{$product->id}}" id="submit"
+                        class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Добавить</button>
+                </div>
         </form>
     </div>
 

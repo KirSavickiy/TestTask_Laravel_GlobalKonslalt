@@ -6,7 +6,7 @@
             <div class="flex items-center gap-2">
 
 
-                <button class="text-blue-500 hover:text-blue-700"  data-id="{{$product->id}}" onclick="openUpdateModal(this)" title="Редактировать">
+                <button class="text-blue-500 hover:text-blue-700"  data-id="{{$product->id}}" data-attributes="{{$product->data}}" onclick="openUpdateModal(this)" title="Редактировать">
                     <i class="fas fa-edit text-xl"></i>
                 </button>
                 <button id="closeModalButton" class="text-gray-400 hover:text-gray-600 focus:outline-none"
