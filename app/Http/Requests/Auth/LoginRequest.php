@@ -82,4 +82,12 @@ class LoginRequest extends FormRequest
     {
         return Str::transliterate(Str::lower($this->string('email')).'|'.$this->ip());
     }
+
+    public function messages(): array {
+        return [
+            'email.required' => 'Поле email обязательно.',
+            'email.email' => 'Введите корректный email.',
+            'password.required' => 'Поле пароль обязательно.',
+        ];
+    }
 }
