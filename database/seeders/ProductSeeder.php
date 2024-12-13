@@ -15,8 +15,8 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        // Получаем первого пользователя (или можно создать тестового пользователя)
-        $user = User::first(); // Или $user = User::factory()->create(); для создания нового пользователя
+
+        $user = User::first();
 
         // Проверяем, есть ли пользователь в базе
         if ($user) {

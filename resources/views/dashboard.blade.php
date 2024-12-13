@@ -3,7 +3,6 @@
         <button id="openModalButton" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none sm:px-6 sm:py-3 sm:text-lg">Добавить</button>
                 @include('windows.add-product')
     </div>
-
     <div class="overflow-x-auto max-w-6xl mx-auto">
         <table class="w-full table-auto border-collapse bg-white sm:text-sm lg:text-base rounded-lg shadow-md">
             <thead class="bg-gray-100">
@@ -50,9 +49,13 @@
                                 data-id="{{$product->id}}" data-attributes="{{$product->data}}" onclick="openUpdateModal(this)"> Редактировать</button>
                             <div id="modalUpdateContainer">
                             </div>
-                            <button class="bg-gray-200 text-gray-700 px-3 py-1 rounded hover:bg-gray-300" onclick="confirm('Вы уверены, что хотите удалить?')">
-                                <span class="text-lg">&#x2715;</span>
-                            </button>
+                            <form action="{{ route('product.delete', $product->id) }}" method="POST" onsubmit="return confirmDelete()">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-gray-200 text-gray-700 px-3 py-1 rounded hover:bg-gray-300">
+                                    <span class="text-lg">&#x2715;</span>
+                                </button>
+                            </form>
                         </div>
                     </td>
                 </tr>

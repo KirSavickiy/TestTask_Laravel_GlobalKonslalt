@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Система управления продуктами'),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,11 +52,11 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://localhost:8081'),
 
     /*
     |--------------------------------------------------------------------------
-    | Application Timezone
+    | Application Timezones
     |--------------------------------------------------------------------------
     |
     | Here you may specify the default timezone for your application, which

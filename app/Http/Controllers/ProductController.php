@@ -61,7 +61,6 @@ class ProductController extends Controller
             ? $this->attributeService->transformAttributes($input['attributesUpdate'])
             : [];
 
-            
         try{
             Product::where('id', $id)->update([
                 'name' => $input['name'],
@@ -95,6 +94,12 @@ class ProductController extends Controller
 
     }
 
+    public function destroy(Request $request, $id)
+    {
+        $product = Product::find($id);
+        $product->delete();
+        return redirect()->route('dashboard');
+    }
         public function __construct(AttributeService $attributeService)
         {
             $this->attributeService = $attributeService;

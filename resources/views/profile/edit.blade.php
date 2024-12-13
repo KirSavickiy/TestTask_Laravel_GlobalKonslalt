@@ -4,7 +4,7 @@
             <!-- Уведомления об успешных действиях -->
             @if (session('status'))
                 <div class="alert alert-success bg-green-100 text-green-800 p-4 rounded-md">
- 
+                    {{ session('status') }}
                 </div>
             @endif
 

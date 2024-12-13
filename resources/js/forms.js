@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", function() {
     let index = 0;
 
@@ -48,7 +47,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
 
-    
     window.openViewModal = function (button) {
         const productId = button.getAttribute('data-id')
 
@@ -97,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 for (const [name, value] of Object.entries(parsedAttributes)) {
                     addAttribute(name, value, true);
                 }
-                
+
             })
             .catch(error => {
                 console.error('Ошибка загрузки данных продукта:', error);
@@ -116,4 +114,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
+    window.confirmDelete = function (){
+        return confirm('Вы уверены, что хотите удалить этот продукт?');
+    }
 });

@@ -1,6 +1,5 @@
 export function displayErrors(errors, update = false) {
     if (!errors) return;
-
     const errorElements = document.querySelectorAll('.error');
     errorElements.forEach(element => element.textContent = '');
 
@@ -34,19 +33,17 @@ export function displayErrors(errors, update = false) {
         }
     }
 }
-
-
 export function transformFormdata(formData) {
     const formObject = {};
     if (!formData) return formObject;
-    
+
     formData.forEach((value, key) => {
         if ((key.startsWith('attributes.')) || (key.startsWith('attributesUpdate.'))) {
             const attributeKey = key.match(/(attributes|attributesUpdate)\.(\d+)\.(key|value)/);
             if (attributeKey) {
-                const group = attributeKey[1]; 
-                const index = attributeKey[2]; 
-                const field = attributeKey[3]; 
+                const group = attributeKey[1];
+                const index = attributeKey[2];
+                const field = attributeKey[3];
 
                 if (!formObject[group]) {
                     formObject[group] = [];
