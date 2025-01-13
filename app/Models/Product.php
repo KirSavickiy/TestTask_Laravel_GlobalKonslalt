@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -24,4 +25,9 @@ class Product extends Model
     ];
 
     protected $dates = ['deleted_at'];
+
+    public function scopeStatus(Builder $query, $status):void
+    {
+        $query->where('status', $status);
+    }
 }

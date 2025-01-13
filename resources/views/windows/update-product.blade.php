@@ -11,10 +11,17 @@
             @php
                 $attributes = $product->data;
             @endphp
+            
             <div class="mb-4">
                 <label for="recordArticle" class="block text-sm font-medium text-gray-700">Артикул</label>
-                <input type="text" name="article" id="recordArticle" value="{{$product->article}}" required
-                    class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+
+            @if($canEditArticle)
+             <input type="text" name="article" id="recordArticle" value="{{ $product->article }}" required
+               class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:border-blue-500">
+             @else
+            <input type="text" name="article" id="recordArticle" value="{{ $product->article }}" readonly
+               class="mt-1 p-2 w-full border border-gray-300 rounded-md bg-gray-100 cursor-not-allowed">
+            @endif
                 <span id="article_update_error" class="error text-red-500 text-sm mt-1 block"></span>
             </div>
 

@@ -15,3 +15,18 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log('Ошибка: Не удалось найти один или несколько элементов.');
     }
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const filterIcon = document.getElementById('statusFilterIcon');
+    const dropdown = document.getElementById('statusDropdown');
+
+    filterIcon.addEventListener('click', function () {
+        dropdown.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', function (e) {
+        if (!dropdown.contains(e.target) && e.target !== filterIcon) {
+            dropdown.classList.add('hidden');
+        }
+    });
+});

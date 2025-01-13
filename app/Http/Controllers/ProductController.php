@@ -12,9 +12,17 @@ use App\Services\AttributeService;
 class ProductController extends Controller
 {
     protected AttributeService $attributeService;
-    public function index()
+    
+    public function index(Request $request)
     {
-        $products = Product::orderBy('created_at', 'desc')->paginate(15);
+        $status = $request->get('status');
+        $query = Product::orderBy('created_at', 'desc');
+
+        if ($status) {
+            $query->status($status); 
+        }
+
+        $products = $query->paginate(15);
         return view('dashboard', compact('products'));
     }
 
@@ -57,6 +65,12 @@ class ProductController extends Controller
     {
         $input = $request->validated();
 
+        $product = Product::findOrFail($id);
+
+        if (!auth()->user()->can('editArticle', $product)) {
+            unset($input['article']); 
+        }
+
         $input['attributesUpdate'] = isset($input['attributesUpdate'])
             ? $this->attributeService->transformAttributes($input['attributesUpdate'])
             : [];
@@ -64,12 +78,12 @@ class ProductController extends Controller
         try{
             Product::where('id', $id)->update([
                 'name' => $input['name'],
-                'article' => $input['article'],
+                'article' => $input['article'] ?? $product->article,
                 'status' => $input['status'],
                 'data' => json_encode($input['attributesUpdate']),
             ]);
         }catch (\Exception $e) {
-            dd($e->getMessage());
+            return response()->json(['error' => $e->getMessage()], 500);
         }
         return response()->json([
             'success' => true,
@@ -83,14 +97,18 @@ class ProductController extends Controller
             abort(403, 'Forbidden');
         }
 
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
+
+        $canEditArticle = auth()->user()->can('editArticle', $product);
+
         $product->index = 0;
         $product->data = json_decode($product->data);
+
         if (!$product) {
             return response()->json(['error' => 'Product not found'], 404);
         }
 
-        return view('windows.update-product', compact('product'));
+        return view('windows.update-product', compact('product', 'canEditArticle'));
 
     }
 
