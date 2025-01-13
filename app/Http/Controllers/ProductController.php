@@ -7,6 +7,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Services\AttributeService;
+use App\Jobs\SendProductCreatedNotification;
 
 
 class ProductController extends Controller
@@ -17,7 +18,7 @@ class ProductController extends Controller
     {
         $status = $request->get('status');
         $query = Product::orderBy('created_at', 'desc');
-
+        
         if ($status) {
             $query->status($status); 
         }
@@ -45,13 +46,15 @@ class ProductController extends Controller
             ? $this->attributeService->transformAttributes($input['attributes'])
             : [];
         try {
-            Product::create([
+            $product = Product::create([
                 'user_id' => Auth::id(),
                 'name' => $input['name'],
                 'article' => $input['article'],
                 'status' => $input['status'],
                 'data' => json_encode($input['attributes']),
             ]);
+            
+            SendProductCreatedNotification::dispatch($product);
         } catch (\Exception $e) {
             dd($e->getMessage());
         }

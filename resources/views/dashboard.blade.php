@@ -26,7 +26,7 @@
             </thead>
             <tbody>
                 @if($products->isEmpty())
-                    <tr>
+                        <tr>
                         <td colspan="5" class="p-4 text-center text-gray-500">Нет данных для отображения</td>
                     </tr>
                 @else

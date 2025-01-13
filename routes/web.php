@@ -3,6 +3,10 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
+// use App\Mail\ProductCreatedNotification;
+// use Illuminate\Support\Facades\Mail;
+// use App\Models\Product;
+
 
 Route::get('/', function () {
     return view('home');
@@ -21,5 +25,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// Route::get('/send-email/{product}', function (Product $product) {
+//     Mail::to('kirill.savickiy@yahoo.com')->send(new ProductCreatedNotification($product));
+//     return response()->json(['message' => 'Email sent successfully']);
+// });
 
 require __DIR__.'/auth.php';
