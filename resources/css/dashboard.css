@@ -54,3 +54,10 @@ button[type="button"]:hover {
     font-size: 0.875rem;
     margin-top: 0.25rem;
 }
+
+.inactive {
+        background-color: gray;
+        cursor: not-allowed;
+        z-index: 50;
+        position: relative;
+    }
