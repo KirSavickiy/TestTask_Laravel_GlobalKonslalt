@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
         openModalButton.addEventListener('click', () => {
             modal.classList.remove('hidden');
             filterIcon.classList.add('inactive'); 
-            filterIcon.style.display = 'none'; /
+            filterIcon.style.display = 'none'; 
         });
 
         closeModalButton.addEventListener('click', () => {
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
             dropdown.classList.toggle('hidden');
         }
     });
-    
+
     document.addEventListener('click', function (e) {
         if (!dropdown.contains(e.target) && e.target !== filterIcon) {
             dropdown.classList.add('hidden');
