@@ -23,7 +23,7 @@ class ProductController extends Controller
             $query->status($status); 
         }
 
-        $products = $query->paginate(15);
+        $products = $query->paginate(15)->appends($request->all());
         return view('dashboard', compact('products'));
     }
 
